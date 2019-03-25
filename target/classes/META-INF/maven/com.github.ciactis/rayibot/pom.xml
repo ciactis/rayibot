@@ -6,11 +6,39 @@
   <name>Rayibot</name>
   
       <dependencies>
-        <dependency>
-            <groupId>org.javacord</groupId>
-            <artifactId>javacord</artifactId>
-            <version>3.0.1</version>
-            <type>pom</type>
-        </dependency>
+<dependency>
+    <groupId>net.dv8tion</groupId>
+    <artifactId>JDA</artifactId>
+    <version>3.8.3_462</version>
+</dependency>
+
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.6</version>
+    <scope>provided</scope>
+</dependency>
+
+   <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+       <version>1.7.5</version>
+   </dependency>
+   <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-log4j12</artifactId>
+       <version>1.7.5</version>
+   </dependency>
+
     </dependencies>
+    
+      <repositories>
+    
+    <repository>
+    <id>jcenter</id>
+    <name>jcenter-bintray</name>
+    <url>http://jcenter.bintray.com</url>
+</repository>
+  </repositories>
+
 </project>

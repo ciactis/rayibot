@@ -1,25 +1,48 @@
 package com.github.ciactis.rayibot;
 
-import org.javacord.api.DiscordApi;
-import org.javacord.api.DiscordApiBuilder;
+import java.io.IOException;
 
-public class Rayibot {
+import javax.security.auth.login.LoginException;
 
-    public static void main(String[] args) {
-        // Insert your bot's token here
-        String token = "your token";
+import com.github.ciactis.rayibot.events.JDAEvents;
 
-        DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
+import net.dv8tion.jda.core.JDA;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
-        // Add a listener which answers with "Pong!" if someone writes "!ping"
-        api.addMessageCreateListener(event -> {
-            if (event.getMessageContent().equalsIgnoreCase("?ping")) {
-                event.getChannel().sendMessage("Pong!");
-            }
-        });
+public class Rayibot extends ListenerAdapter {
 
-        // Print the invite url of your bot
-        System.out.println("You can invite the bot by using the following url: " + api.createBotInvite());
+    private static JDA jda;
+    
+    public static void main(String[] args) throws IOException
+    {
+        // config.txt contains two lines
+        // the first is the bot token
+        String token = args[0];
+
+        //We construct a builder for a BOT account. If we wanted to use a CLIENT account
+        // we would use AccountType.CLIENT
+        try
+        {
+            jda = new JDABuilder(token)         // The token of the account that is logging in.
+                    .addEventListener(new JDAEvents())  // An instance of a class that will handle events.
+                    .build();
+            jda.awaitReady(); // Blocking guarantees that JDA will be completely loaded.
+            System.out.println("Finished Building JDA!");
+        }
+        catch (LoginException e)
+        {
+            //If anything goes wrong in terms of authentication, this is the exception that will represent it
+            e.printStackTrace();
+        }
+        catch (InterruptedException e)
+        {
+            //Due to the fact that awaitReady is a blocking method, one which waits until JDA is fully loaded,
+            // the waiting can be interrupted. This is the exception that would fire in that situation.
+            //As a note: in this extremely simplified example this will never occur. In fact, this will never occur unless
+            // you use awaitReady in a thread that has the possibility of being interrupted (async thread usage and interrupts)
+            e.printStackTrace();
+        }
     }
 
 }

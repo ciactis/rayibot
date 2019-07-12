@@ -14,6 +14,7 @@ import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 public class JDAEvents extends ListenerAdapter {
@@ -44,7 +45,16 @@ public class JDAEvents extends ListenerAdapter {
         }
         
         if (text.toLowerCase().contains("rayito")) {
-            message.addReaction("\u26A1").queue();
+            message.addReaction(RayiConstants.RAYITO).queue();
+        }
+    }
+    
+    @Override
+    public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
+        User author = event.getAuthor();
+        if (!author.isBot()) {
+            MessageChannel channel = event.getChannel();
+            channel.sendMessage("AAAA!").queue();
         }
     }
 }

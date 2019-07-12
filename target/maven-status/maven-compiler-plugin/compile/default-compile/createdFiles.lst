@@ -1,0 +1,8 @@
+com\github\ciactis\commands\Command.class
+com\github\ciactis\commands\AnimalSoundCommand.class
+com\github\ciactis\commands\HiCommand.class
+com\github\ciactis\commands\SmashCommand.class
+com\github\ciactis\rayibot\events\JDAEvents.class
+com\github\ciactis\rayibot\utils\TextFileManager.class
+com\github\ciactis\rayibot\utils\RayiConstants.class
+com\github\ciactis\rayibot\Rayibot.class
